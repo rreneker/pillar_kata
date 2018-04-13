@@ -1,36 +1,49 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace pillar_kata
 {
     public class VendingMachine{
        public string Display;
-       public string CoinReturn;
+       public List<string> CoinReturn;
+       public List<string> CurrentCoins;
        public int Credit;
 
        public VendingMachine()
        {
            Display = "INSERT COIN";
-           CoinReturn = "";
+           CoinReturn = new List<string>();
+           CurrentCoins = new List<string>();
            Credit = 0;
        }
 
        public void AddCoin(string coin){
            if(coin == "Quarter"){
                Credit += 25;
-               Display = "CREDIT: ."+Credit.ToString();
+               CurrentCoins.Add(coin);
+               Display = "CREDIT: "+Credit.ToString();
            }
            else if(coin == "Dime"){
                Credit += 10;
-               Display = "CREDIT: ."+Credit.ToString();
+               CurrentCoins.Add(coin);
+               Display = "CREDIT: "+Credit.ToString();
            }
            else if(coin == "Nickel"){
                Credit += 5;
-               Display = "CREDIT: ."+Credit.ToString();
+               CurrentCoins.Add(coin);
+               Display = "CREDIT: "+Credit.ToString();
            }
            else if(coin == "Penny"){
-               CoinReturn = coin;
+               CoinReturn.Add(coin);
            }
            
+       }
+
+       public void ReturnCoins(){
+           CoinReturn.AddRange(CurrentCoins);
+           CurrentCoins.Clear();
+           Display="INSERT COIN";
+           Credit=0;
        }
    }
 }
