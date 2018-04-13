@@ -14,5 +14,19 @@ namespace pillar_kata
             Assert.AreEqual("INSERT COIN",vendingMachine.Display);
             Assert.AreEqual("Penny",vendingMachine.CoinReturn);
         }
+
+        [TestMethod]
+        public void AcceptsQuartersNickelsAndDimesAndDoesNotReturnThem(){
+            VendingMachine vendingMachine = new VendingMachine();
+            vendingMachine.AddCoin("Quarter");
+            Assert.AreEqual("CREDIT: .25",vendingMachine.Display);
+            Assert.AreEqual("",vendingMachine.CoinReturn);
+            vendingMachine.AddCoin("Dime");
+            Assert.AreEqual("CREDIT: .35",vendingMachine.Display);
+            Assert.AreEqual("",vendingMachine.CoinReturn);
+            vendingMachine.AddCoin("Nickel");
+            Assert.AreEqual("CREDIT: .40",vendingMachine.Display);
+            Assert.AreEqual("",vendingMachine.CoinReturn);
+        }
     }
 }
