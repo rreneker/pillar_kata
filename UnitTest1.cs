@@ -12,6 +12,7 @@ namespace pillar_kata
             vendingMachine.AddCoin("Penny");
 
             Assert.AreEqual("INSERT COIN",vendingMachine.Display);
+            Assert.AreEqual("Penny",vendingMachine.CoinReturn);
         }
     }
 }
