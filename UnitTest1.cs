@@ -20,7 +20,7 @@ namespace pillar_kata
 
             List<string> ExpectedResult = new List<string>();
             ExpectedResult.Add("Penny");
-            Assert.AreEqual("INSERT COIN",vendingMachine.Display);
+            Assert.AreEqual("INSERT COIN",vendingMachine.CheckDisplay());
             CollectionAssert.AreEqual(ExpectedResult,vendingMachine.CoinReturn);
         }
 
@@ -29,13 +29,13 @@ namespace pillar_kata
             
             List<string> ExpectedResult = new List<string>();
             vendingMachine.AddCoin("Quarter");
-            Assert.AreEqual("CREDIT: 25",vendingMachine.Display);
+            Assert.AreEqual("CREDIT: 25",vendingMachine.CheckDisplay());
             CollectionAssert.AreEqual(ExpectedResult,vendingMachine.CoinReturn);
             vendingMachine.AddCoin("Dime");
-            Assert.AreEqual("CREDIT: 35",vendingMachine.Display);
+            Assert.AreEqual("CREDIT: 35",vendingMachine.CheckDisplay());
             CollectionAssert.AreEqual(ExpectedResult,vendingMachine.CoinReturn);
             vendingMachine.AddCoin("Nickel");
-            Assert.AreEqual("CREDIT: 40",vendingMachine.Display);
+            Assert.AreEqual("CREDIT: 40",vendingMachine.CheckDisplay());
             CollectionAssert.AreEqual(ExpectedResult,vendingMachine.CoinReturn);
         }
 
@@ -55,7 +55,7 @@ namespace pillar_kata
             ExpectedResult.Add("Nickel");
 
             CollectionAssert.AreEqual(ExpectedResult,vendingMachine.CoinReturn);
-            Assert.AreEqual("INSERT COIN",vendingMachine.Display);
+            Assert.AreEqual("INSERT COIN",vendingMachine.CheckDisplay());
             Assert.AreEqual(0,vendingMachine.Credit);
         }
 
@@ -89,6 +89,24 @@ namespace pillar_kata
 
             CollectionAssert.AreEqual(ExpectedResult, vendingMachine.EmptyCoinReturn());
             CollectionAssert.AreEqual(new List<string>(),vendingMachine.CoinReturn);
+        }
+
+        [TestMethod]
+        public void AttemptPurchaseWithInsufficientCredit(){
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.Buy("Chips");
+
+            Assert.AreEqual("PRICE: 50",vendingMachine.CheckDisplay());
+            Assert.AreEqual("CREDIT: 25",vendingMachine.CheckDisplay());
+
+            vendingMachine.Buy("Cola");
+            Assert.AreEqual("PRICE: 100",vendingMachine.CheckDisplay());
+            Assert.AreEqual("CREDIT: 25",vendingMachine.CheckDisplay());
+
+            vendingMachine.Buy("Candy");
+            Assert.AreEqual("PRICE: 65",vendingMachine.CheckDisplay());
+            Assert.AreEqual("CREDIT: 25",vendingMachine.CheckDisplay());
+
         }
     }
 }

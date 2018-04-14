@@ -9,12 +9,15 @@ namespace pillar_kata
        public List<string> CurrentCoins;
        public int Credit;
 
+       private bool tempDisplay;
+
        public VendingMachine()
        {
            Display = "INSERT COIN";
            CoinReturn = new List<string>();
            CurrentCoins = new List<string>();
            Credit = 0;
+           tempDisplay = false;
        }
 
        public void AddCoin(string coin){
@@ -51,6 +54,30 @@ namespace pillar_kata
            Result.AddRange(CoinReturn);
            CoinReturn.Clear();
            return Result;
+       }
+
+       public string CheckDisplay(){
+           string ReturnValue = Display;
+           if(tempDisplay == true){
+               tempDisplay = false;
+               Display = "CREDIT: "+Credit.ToString();
+           }
+           return ReturnValue;
+       }
+
+       public void Buy(string item){
+           if(item == "Chips"){
+               Display = "PRICE: 50";
+               tempDisplay = true;
+           }
+           else if(item == "Cola"){
+               Display = "PRICE: 100";
+               tempDisplay = true;
+           }
+           else if(item == "Candy"){
+               Display = "PRICE: 65";
+               tempDisplay = true;
+           }
        }
    }
 }
