@@ -45,5 +45,12 @@ namespace pillar_kata
            Display="INSERT COIN";
            Credit=0;
        }
+
+       public List<string> EmptyCoinReturn(){
+           List<string> Result = new List<string>();
+           Result.AddRange(CoinReturn);
+           CoinReturn.Clear();
+           return Result;
+       }
    }
 }

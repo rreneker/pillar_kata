@@ -70,5 +70,20 @@ namespace pillar_kata
 
             CollectionAssert.AreEqual(ExpectedResult,vendingMachine.CoinReturn);
         }
+
+        [TestMethod]
+        public void ProperlyEmptyCoinReturn(){
+            VendingMachine vendingMachine = new VendingMachine();
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Dime");
+            vendingMachine.ReturnCoins();
+
+            List<string> ExpectedResult = new List<string>();
+            ExpectedResult.Add("Quarter");
+            ExpectedResult.Add("Dime");
+
+            CollectionAssert.AreEqual(ExpectedResult, vendingMachine.EmptyCoinReturn());
+            CollectionAssert.AreEqual(new List<string>(),vendingMachine.CoinReturn);
+        }
     }
 }
