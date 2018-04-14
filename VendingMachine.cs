@@ -72,14 +72,16 @@ namespace pillar_kata
            }
            return ReturnValue;
        }
-
+       public void PurchaseHelper(string product){
+            Display = "THANK YOU";
+            tempDisplay = true;
+            Credit = 0;
+            PurchasedProducts.Add(product);
+       }
        public void Buy(string item){
            if(item == "Chips"){
                if(Credit >= 50){
-                   Display = "THANK YOU";
-                   tempDisplay = true;
-                   Credit = 0;
-                   PurchasedProducts.Add("Chips");
+                   PurchaseHelper(item);    
                }
                else{
                     Display = "PRICE: 50";
@@ -89,10 +91,7 @@ namespace pillar_kata
            }
            else if(item == "Cola"){
                if(Credit >= 100){
-                   Display = "THANK YOU";
-                   tempDisplay = true;
-                   Credit = 0;
-                   PurchasedProducts.Add("Cola");
+                   PurchaseHelper(item);
                }
                else{
                    Display = "PRICE: 100";
@@ -101,10 +100,7 @@ namespace pillar_kata
            }
            else if(item == "Candy"){
                if(Credit >= 65){
-                   Display = "THANK YOU";
-                   tempDisplay = true;
-                   Credit = 0;
-                   PurchasedProducts.Add("Candy");
+                   PurchaseHelper(item);
                }
                else{
                    Display = "PRICE: 65";
