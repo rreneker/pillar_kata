@@ -53,5 +53,22 @@ namespace pillar_kata
             Assert.AreEqual("INSERT COIN",vendingMachine.Display);
             Assert.AreEqual(0,vendingMachine.Credit);
         }
+
+        [TestMethod]
+        public void ReturnedCoinsAddedToCoinReturnThatAlreadyHasCoins(){
+            VendingMachine vendingMachine = new VendingMachine();
+            vendingMachine.AddCoin("Penny");
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Dime");
+
+            List<string> ExpectedResult = new List<string>();
+            ExpectedResult.Add("Penny");
+            ExpectedResult.Add("Quarter");
+            ExpectedResult.Add("Dime");
+
+            vendingMachine.ReturnCoins();
+
+            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.CoinReturn);
+        }
     }
 }
