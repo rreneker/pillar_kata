@@ -108,5 +108,12 @@ namespace pillar_kata
             Assert.AreEqual("CREDIT: 25",vendingMachine.CheckDisplay());
 
         }
+
+        [TestMethod]
+        public void AttemptPurchaseWithNoCredit(){
+            vendingMachine.Buy("Chips");
+            Assert.AreEqual("PRICE: 50",vendingMachine.CheckDisplay());
+            Assert.AreEqual("INSERT COIN",vendingMachine.CheckDisplay());
+        }
     }
 }

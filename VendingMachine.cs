@@ -60,7 +60,13 @@ namespace pillar_kata
            string ReturnValue = Display;
            if(tempDisplay == true){
                tempDisplay = false;
-               Display = "CREDIT: "+Credit.ToString();
+               if(Credit > 0){
+                   Display = "CREDIT: "+Credit.ToString();
+               }
+               else{
+                   Display = "INSERT COIN";
+               }
+               
            }
            return ReturnValue;
        }
