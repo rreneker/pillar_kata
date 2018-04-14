@@ -7,6 +7,7 @@ namespace pillar_kata
        public string Display;
        public List<string> CoinReturn;
        public List<string> CurrentCoins;
+       public List<string> PurchasedProducts;
        public int Credit;
 
        private bool tempDisplay;
@@ -16,6 +17,7 @@ namespace pillar_kata
            Display = "INSERT COIN";
            CoinReturn = new List<string>();
            CurrentCoins = new List<string>();
+           PurchasedProducts = new List<string>();
            Credit = 0;
            tempDisplay = false;
        }
@@ -73,17 +75,50 @@ namespace pillar_kata
 
        public void Buy(string item){
            if(item == "Chips"){
-               Display = "PRICE: 50";
-               tempDisplay = true;
+               if(Credit >= 50){
+                   Display = "THANK YOU";
+                   tempDisplay = true;
+                   Credit = 0;
+                   PurchasedProducts.Add("Chips");
+               }
+               else{
+                    Display = "PRICE: 50";
+                    tempDisplay = true;
+               }
+              
            }
            else if(item == "Cola"){
-               Display = "PRICE: 100";
-               tempDisplay = true;
+               if(Credit >= 100){
+                   Display = "THANK YOU";
+                   tempDisplay = true;
+                   Credit = 0;
+                   PurchasedProducts.Add("Cola");
+               }
+               else{
+                   Display = "PRICE: 100";
+                   tempDisplay = true;
+               }
            }
            else if(item == "Candy"){
-               Display = "PRICE: 65";
-               tempDisplay = true;
+               if(Credit >= 65){
+                   Display = "THANK YOU";
+                   tempDisplay = true;
+                   Credit = 0;
+                   PurchasedProducts.Add("Candy");
+               }
+               else{
+                   Display = "PRICE: 65";
+                   tempDisplay = true;
+               }
            }
+       }
+
+       public List<string> RemoveProducts(){
+           List<string> ReturnProducts = new List<string>();
+           ReturnProducts.AddRange(PurchasedProducts);
+           PurchasedProducts.Clear();
+           return ReturnProducts;
+           
        }
    }
 }

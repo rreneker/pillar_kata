@@ -115,5 +115,46 @@ namespace pillar_kata
             Assert.AreEqual("PRICE: 50",vendingMachine.CheckDisplay());
             Assert.AreEqual("INSERT COIN",vendingMachine.CheckDisplay());
         }
+
+        [TestMethod]
+        public void AttemptPurchaseWithSufficientCredit(){
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Quarter");
+
+            vendingMachine.Buy("Cola");
+
+            Assert.AreEqual("THANK YOU",vendingMachine.CheckDisplay());
+            Assert.AreEqual("INSERT COIN",vendingMachine.CheckDisplay());
+
+            List<string> ExpectedProducts = new List<string>();
+            ExpectedProducts.Add("Cola");
+
+            CollectionAssert.AreEqual(ExpectedProducts,vendingMachine.RemoveProducts());
+            Assert.AreEqual(0,vendingMachine.Credit);
+
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.Buy("Chips");
+            Assert.AreEqual("THANK YOU",vendingMachine.CheckDisplay());
+            Assert.AreEqual("INSERT COIN",vendingMachine.CheckDisplay());
+            ExpectedProducts.Clear();
+            ExpectedProducts.Add("Chips");
+            CollectionAssert.AreEqual(ExpectedProducts,vendingMachine.RemoveProducts());
+
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Dime");
+            vendingMachine.AddCoin("Nickel");
+            vendingMachine.Buy("Candy");
+            Assert.AreEqual("THANK YOU",vendingMachine.CheckDisplay());
+            Assert.AreEqual("INSERT COIN",vendingMachine.CheckDisplay());
+            ExpectedProducts.Clear();
+            ExpectedProducts.Add("Candy");
+            CollectionAssert.AreEqual(ExpectedProducts,vendingMachine.RemoveProducts());
+
+
+        }
     }
 }
