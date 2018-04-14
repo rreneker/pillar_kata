@@ -7,10 +7,15 @@ namespace pillar_kata
     [TestClass]
     public class UnitTest1
     {
+        VendingMachine vendingMachine;
+        [TestInitialize]
+        public void TestSetup(){
+            vendingMachine = new VendingMachine();
+        }
         [TestMethod]
         public void RejectsPennies()
         {
-            VendingMachine vendingMachine = new VendingMachine();
+            
             vendingMachine.AddCoin("Penny");
 
             List<string> ExpectedResult = new List<string>();
@@ -21,7 +26,7 @@ namespace pillar_kata
 
         [TestMethod]
         public void AcceptsQuartersNickelsAndDimesAndDoesNotReturnThem(){
-            VendingMachine vendingMachine = new VendingMachine();
+            
             List<string> ExpectedResult = new List<string>();
             vendingMachine.AddCoin("Quarter");
             Assert.AreEqual("CREDIT: 25",vendingMachine.Display);
@@ -36,7 +41,7 @@ namespace pillar_kata
 
         [TestMethod]
         public void ReturnsCoins(){
-            VendingMachine vendingMachine = new VendingMachine();
+            
             vendingMachine.AddCoin("Quarter");
             vendingMachine.AddCoin("Quarter");
             vendingMachine.AddCoin("Dime");
@@ -56,7 +61,7 @@ namespace pillar_kata
 
         [TestMethod]
         public void ReturnedCoinsAddedToCoinReturnThatAlreadyHasCoins(){
-            VendingMachine vendingMachine = new VendingMachine();
+            
             vendingMachine.AddCoin("Penny");
             vendingMachine.AddCoin("Quarter");
             vendingMachine.AddCoin("Dime");
@@ -73,7 +78,7 @@ namespace pillar_kata
 
         [TestMethod]
         public void ProperlyEmptyCoinReturn(){
-            VendingMachine vendingMachine = new VendingMachine();
+            
             vendingMachine.AddCoin("Quarter");
             vendingMachine.AddCoin("Dime");
             vendingMachine.ReturnCoins();
