@@ -180,5 +180,22 @@ namespace pillar_kata
             CollectionAssert.AreEqual(ExpectedChange,vendingMachine.EmptyCoinReturn());
 
         }
+
+        [TestMethod]
+        public void SoldOut(){
+            VendingMachine vendMachine = new VendingMachine(0,0,0);
+
+            vendMachine.Buy("Cola");
+            Assert.AreEqual("SOLD OUT",vendMachine.CheckDisplay());
+            Assert.AreEqual("INSERT COIN",vendMachine.CheckDisplay());
+
+            vendMachine.Buy("Candy");
+            Assert.AreEqual("SOLD OUT",vendMachine.CheckDisplay());
+            Assert.AreEqual("INSERT COIN",vendMachine.CheckDisplay());
+
+            vendMachine.Buy("Chips");
+            Assert.AreEqual("SOLD OUT",vendMachine.CheckDisplay());
+            Assert.AreEqual("INSERT COIN",vendMachine.CheckDisplay());
+        }
     }
 }

@@ -12,6 +12,10 @@ namespace pillar_kata
 
        private bool tempDisplay;
 
+       private int colaStock;
+       private int candyStock;
+       private int chipsStock;
+
        public VendingMachine()
        {
            Display = "INSERT COIN";
@@ -20,6 +24,14 @@ namespace pillar_kata
            PurchasedProducts = new List<string>();
            Credit = 0;
            tempDisplay = false;
+           colaStock = 10;
+           candyStock = 10;
+           chipsStock = 10;
+       }
+       public VendingMachine(int cola, int chips, int candy): this(){
+           colaStock = cola;
+           candyStock = candy;
+           chipsStock = chips;
        }
 
        public void AddCoin(string coin){
@@ -96,7 +108,11 @@ namespace pillar_kata
        }
        public void Buy(string item){
            if(item == "Chips"){
-               if(Credit >= 50){
+               if(chipsStock == 0){
+                   Display = "SOLD OUT";
+                   tempDisplay = true;
+               }
+               else if(Credit >= 50){
                    MakeChange(Credit-50);
                    PurchaseHelper(item);    
                }
@@ -107,7 +123,11 @@ namespace pillar_kata
               
            }
            else if(item == "Cola"){
-               if(Credit >= 100){
+               if(colaStock == 0){
+                   Display = "SOLD OUT";
+                   tempDisplay = true;
+               }
+               else if(Credit >= 100){
                    MakeChange(Credit-100);
                    PurchaseHelper(item);
                }
@@ -117,7 +137,11 @@ namespace pillar_kata
                }
            }
            else if(item == "Candy"){
-               if(Credit >= 65){
+               if(candyStock == 0){
+                   Display = "SOLD OUT";
+                   tempDisplay = true;
+               }
+               else if(Credit >= 65){
                    MakeChange(Credit-65);
                    PurchaseHelper(item);
                }
