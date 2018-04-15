@@ -156,5 +156,29 @@ namespace pillar_kata
 
 
         }
+        [TestMethod]
+        public void GetCorrectChangeAfterSuccessfulPurchase(){
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.Buy("Candy");
+
+            List<string> ExpectedChange = new List<string>();
+            ExpectedChange.Add("Quarter");
+            ExpectedChange.Add("Dime");
+            CollectionAssert.AreEqual(ExpectedChange,vendingMachine.EmptyCoinReturn());
+            ExpectedChange.Clear();
+
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.AddCoin("Quarter");
+            vendingMachine.Buy("Chips");
+            ExpectedChange.Add("Quarter");
+            ExpectedChange.Add("Quarter");
+            CollectionAssert.AreEqual(ExpectedChange,vendingMachine.EmptyCoinReturn());
+
+        }
     }
 }

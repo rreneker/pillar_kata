@@ -72,15 +72,32 @@ namespace pillar_kata
            }
            return ReturnValue;
        }
-       public void PurchaseHelper(string product){
+       private void PurchaseHelper(string product){
             Display = "THANK YOU";
             tempDisplay = true;
             Credit = 0;
             PurchasedProducts.Add(product);
        }
+       private void MakeChange(int credit){
+           while(credit != 0){
+               if(credit >= 25){
+                   CoinReturn.Add("Quarter");
+                   credit -= 25;
+               }
+               else if(credit >= 10){
+                   CoinReturn.Add("Dime");
+                   credit -= 10;
+               }
+               else{
+                   CoinReturn.Add("Nickel");
+                   credit -= 5;
+               }
+           }
+       }
        public void Buy(string item){
            if(item == "Chips"){
                if(Credit >= 50){
+                   MakeChange(Credit-50);
                    PurchaseHelper(item);    
                }
                else{
@@ -91,6 +108,7 @@ namespace pillar_kata
            }
            else if(item == "Cola"){
                if(Credit >= 100){
+                   MakeChange(Credit-100);
                    PurchaseHelper(item);
                }
                else{
@@ -100,6 +118,7 @@ namespace pillar_kata
            }
            else if(item == "Candy"){
                if(Credit >= 65){
+                   MakeChange(Credit-65);
                    PurchaseHelper(item);
                }
                else{
