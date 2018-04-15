@@ -182,7 +182,7 @@ namespace pillar_kata
         }
 
         [TestMethod]
-        public void SoldOut(){
+        public void CheckIfSoldOut(){
             VendingMachine vendMachine = new VendingMachine(0,0,0);
 
             vendMachine.Buy("Cola");
@@ -196,6 +196,37 @@ namespace pillar_kata
             vendMachine.Buy("Chips");
             Assert.AreEqual("SOLD OUT",vendMachine.CheckDisplay());
             Assert.AreEqual("INSERT COIN",vendMachine.CheckDisplay());
+        }
+
+        [TestMethod]
+        public void SellOutOfItems(){
+            VendingMachine vendMachine = new VendingMachine(2,2,2);
+            for(int i =0; i < 3; i++){
+                vendMachine.AddCoin("Quarter");
+                vendMachine.AddCoin("Quarter");
+                vendMachine.AddCoin("Quarter");
+                vendMachine.AddCoin("Quarter");
+                vendMachine.Buy("Cola");
+            }
+            Assert.AreEqual("SOLD OUT",vendMachine.CheckDisplay());
+            Assert.AreEqual("CREDIT: 100",vendMachine.CheckDisplay());
+
+            for(int j =0; j < 3; j++){
+                vendMachine.AddCoin("Quarter");
+                vendMachine.AddCoin("Quarter");
+                vendMachine.AddCoin("Quarter");
+                vendMachine.Buy("Candy");
+            }
+            Assert.AreEqual("SOLD OUT",vendMachine.CheckDisplay());
+            Assert.AreEqual("CREDIT: 75",vendMachine.CheckDisplay());
+
+            for(int k =0; k < 3; k++){
+                vendMachine.AddCoin("Quarter");
+                vendMachine.AddCoin("Quarter");
+                vendMachine.Buy("Chips");
+            }
+            Assert.AreEqual("SOLD OUT",vendMachine.CheckDisplay());
+            Assert.AreEqual("CREDIT: 50",vendMachine.CheckDisplay());
         }
     }
 }

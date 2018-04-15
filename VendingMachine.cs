@@ -114,7 +114,8 @@ namespace pillar_kata
                }
                else if(Credit >= 50){
                    MakeChange(Credit-50);
-                   PurchaseHelper(item);    
+                   PurchaseHelper(item);
+                   chipsStock--;    
                }
                else{
                     Display = "PRICE: 50";
@@ -130,6 +131,7 @@ namespace pillar_kata
                else if(Credit >= 100){
                    MakeChange(Credit-100);
                    PurchaseHelper(item);
+                   colaStock--;
                }
                else{
                    Display = "PRICE: 100";
@@ -144,6 +146,7 @@ namespace pillar_kata
                else if(Credit >= 65){
                    MakeChange(Credit-65);
                    PurchaseHelper(item);
+                   candyStock--;
                }
                else{
                    Display = "PRICE: 65";
