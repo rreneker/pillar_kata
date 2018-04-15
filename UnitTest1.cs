@@ -188,14 +188,17 @@ namespace pillar_kata
             vendMachine.Buy("Cola");
             Assert.AreEqual("SOLD OUT",vendMachine.CheckDisplay());
             Assert.AreEqual("INSERT COIN",vendMachine.CheckDisplay());
+            CollectionAssert.AreEqual(new List<string>(), vendMachine.RemoveProducts());
 
             vendMachine.Buy("Candy");
             Assert.AreEqual("SOLD OUT",vendMachine.CheckDisplay());
             Assert.AreEqual("INSERT COIN",vendMachine.CheckDisplay());
+            CollectionAssert.AreEqual(new List<string>(), vendMachine.RemoveProducts());
 
             vendMachine.Buy("Chips");
             Assert.AreEqual("SOLD OUT",vendMachine.CheckDisplay());
             Assert.AreEqual("INSERT COIN",vendMachine.CheckDisplay());
+            CollectionAssert.AreEqual(new List<string>(), vendMachine.RemoveProducts());
         }
 
         [TestMethod]
