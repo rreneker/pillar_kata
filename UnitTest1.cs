@@ -265,6 +265,19 @@ namespace pillar_kata
             Assert.AreEqual("EXACT CHANGE ONLY",vendMachine.CheckDisplay());
         }
 
+        [TestMethod]
+        public void CheckIfMachineGetsOutOfExactChangeMode(){
+            VendingMachine vendMachine = new VendingMachine(10,10,10,1,0,0);
+            vendMachine.AddCoin("Quarter");
+            vendMachine.AddCoin("Quarter");
+            vendMachine.AddCoin("Dime");
+            vendMachine.AddCoin("Nickel");
+            vendMachine.Buy("Candy");
+            string dummy = vendMachine.CheckDisplay();
+
+            Assert.AreEqual("INSERT COIN",vendMachine.CheckDisplay());
+        }
+
         
     }
 }

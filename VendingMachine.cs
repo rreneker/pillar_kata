@@ -114,6 +114,19 @@ namespace pillar_kata
             PurchasedProducts.Add(product);
        }
        private void MakeChange(int credit){
+           
+           for(int i = 0; i < CurrentCoins.Count;i++){
+               if(CurrentCoins[i] == "Quarter"){
+                   quarters++;
+               }
+               else if(CurrentCoins[i] == "Dime"){
+                   dimes++;
+               }
+               else if(CurrentCoins[i] == "Nickel"){
+                   nickels++;
+               }
+           }
+           CurrentCoins.Clear();
            while(credit != 0){
                if(credit >= 25 && quarters > 0){
                    CoinReturn.Add("Quarter");
