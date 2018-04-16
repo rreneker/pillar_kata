@@ -19,6 +19,8 @@ namespace pillar_kata
        private int dimes;
        public int nickels;
 
+       private bool exactChangeNeeded;
+
        public VendingMachine()
        {
            Display = "INSERT COIN";
@@ -27,6 +29,7 @@ namespace pillar_kata
            PurchasedProducts = new List<string>();
            Credit = 0;
            tempDisplay = false;
+           exactChangeNeeded = false;
            colaStock = 10;
            candyStock = 10;
            chipsStock = 10;
@@ -50,6 +53,7 @@ namespace pillar_kata
            this.quarters = quarters;
            if(this.nickels == 0 || this.dimes == 0){
                Display = "EXACT CHANGE ONLY";
+               exactChangeNeeded = true;
            }
            
        }
@@ -96,6 +100,7 @@ namespace pillar_kata
                tempDisplay = false;
                if(nickels == 0 || dimes == 0){
                    Display = "EXACT CHANGE ONLY";
+                   exactChangeNeeded = true;
                }
                else if(Credit > 0){
                    Display = "CREDIT: "+Credit.ToString();
@@ -145,6 +150,12 @@ namespace pillar_kata
                    nickels--;
                    
                }
+               else{
+                   break;
+               }
+           }
+           if(nickels > 0 && dimes > 0){
+               exactChangeNeeded = false;
            }
        }
        public void Buy(string item){
@@ -152,6 +163,9 @@ namespace pillar_kata
                if(chipsStock == 0){
                    Display = "SOLD OUT";
                    tempDisplay = true;
+               }
+               else if(exactChangeNeeded == true){
+                   ReturnCoins();
                }
                else if(Credit >= 50){
                    MakeChange(Credit-50);
@@ -169,6 +183,9 @@ namespace pillar_kata
                    Display = "SOLD OUT";
                    tempDisplay = true;
                }
+               else if(exactChangeNeeded == true){
+                   ReturnCoins();
+               }
                else if(Credit >= 100){
                    MakeChange(Credit-100);
                    PurchaseHelper(item);
@@ -183,6 +200,9 @@ namespace pillar_kata
                if(candyStock == 0){
                    Display = "SOLD OUT";
                    tempDisplay = true;
+               }
+               else if(exactChangeNeeded == true){
+                   ReturnCoins();
                }
                else if(Credit >= 65){
                    MakeChange(Credit-65);

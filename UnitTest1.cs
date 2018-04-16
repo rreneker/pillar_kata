@@ -278,6 +278,25 @@ namespace pillar_kata
             Assert.AreEqual("INSERT COIN",vendMachine.CheckDisplay());
         }
 
+        [TestMethod]
+        public void EnforceExactChangeState(){
+            VendingMachine machine = new VendingMachine(10,10,10,0,0,0);
+            machine.AddCoin("Quarter");
+            machine.AddCoin("Quarter");
+            machine.AddCoin("Quarter");
+            machine.Buy("Candy");
+
+            List<string> ExpectedChange = new List<string>();
+            ExpectedChange.Add("Quarter");
+            ExpectedChange.Add("Quarter");
+            ExpectedChange.Add("Quarter");
+            
+
+            CollectionAssert.AreEqual(new List<string>(), machine.RemoveProducts());
+            CollectionAssert.AreEqual(ExpectedChange,machine.EmptyCoinReturn());
+
+        }
+
         
     }
 }
