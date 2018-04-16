@@ -21,7 +21,7 @@ namespace pillar_kata
             List<string> ExpectedResult = new List<string>();
             ExpectedResult.Add("Penny");
             Assert.AreEqual("INSERT COIN",vendingMachine.CheckDisplay());
-            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.CoinReturn);
+            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.EmptyCoinReturn());
         }
 
         [TestMethod]
@@ -30,13 +30,13 @@ namespace pillar_kata
             List<string> ExpectedResult = new List<string>();
             vendingMachine.AddCoin("Quarter");
             Assert.AreEqual("CREDIT: 25",vendingMachine.CheckDisplay());
-            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.CoinReturn);
+            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.EmptyCoinReturn());
             vendingMachine.AddCoin("Dime");
             Assert.AreEqual("CREDIT: 35",vendingMachine.CheckDisplay());
-            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.CoinReturn);
+            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.EmptyCoinReturn());
             vendingMachine.AddCoin("Nickel");
             Assert.AreEqual("CREDIT: 40",vendingMachine.CheckDisplay());
-            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.CoinReturn);
+            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.EmptyCoinReturn());
         }
 
         [TestMethod]
@@ -54,9 +54,9 @@ namespace pillar_kata
             ExpectedResult.Add("Dime");
             ExpectedResult.Add("Nickel");
 
-            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.CoinReturn);
+            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.EmptyCoinReturn());
             Assert.AreEqual("INSERT COIN",vendingMachine.CheckDisplay());
-            Assert.AreEqual(0,vendingMachine.Credit);
+            Assert.AreEqual(0,vendingMachine.GetCredit());
         }
 
         [TestMethod]
@@ -73,7 +73,7 @@ namespace pillar_kata
 
             vendingMachine.ReturnCoins();
 
-            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.CoinReturn);
+            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.EmptyCoinReturn());
         }
 
         [TestMethod]
@@ -88,7 +88,7 @@ namespace pillar_kata
             ExpectedResult.Add("Dime");
 
             CollectionAssert.AreEqual(ExpectedResult, vendingMachine.EmptyCoinReturn());
-            CollectionAssert.AreEqual(new List<string>(),vendingMachine.CoinReturn);
+            CollectionAssert.AreEqual(new List<string>(),vendingMachine.EmptyCoinReturn());
         }
 
         [TestMethod]
@@ -132,7 +132,7 @@ namespace pillar_kata
             ExpectedProducts.Add("Cola");
 
             CollectionAssert.AreEqual(ExpectedProducts,vendingMachine.RemoveProducts());
-            Assert.AreEqual(0,vendingMachine.Credit);
+            Assert.AreEqual(0,vendingMachine.GetCredit());
 
             vendingMachine.AddCoin("Quarter");
             vendingMachine.AddCoin("Quarter");

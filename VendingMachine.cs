@@ -4,11 +4,11 @@ using System.Collections.Generic;
 namespace pillar_kata
 {
     public class VendingMachine{
-       public string Display;
-       public List<string> CoinReturn;
-       public List<string> CurrentCoins;
-       public List<string> PurchasedProducts;
-       public int Credit;
+       private string Display;
+       private List<string> CoinReturn;
+       private List<string> CurrentCoins;
+       private List<string> PurchasedProducts;
+       private int Credit;
 
        private bool tempDisplay;
 
@@ -56,6 +56,10 @@ namespace pillar_kata
                exactChangeNeeded = true;
            }
            
+       }
+
+       public int GetCredit(){
+           return Credit;
        }
 
        public void AddCoin(string coin){
