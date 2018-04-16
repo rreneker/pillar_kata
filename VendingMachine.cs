@@ -78,9 +78,6 @@ namespace pillar_kata
                CurrentCoins.Add(coin);
                Display = "CREDIT: "+Credit.ToString();
            }
-           else if(coin == "Penny"){
-               CoinReturn.Add(coin);
-           }
            else{
                CoinReturn.Add(coin);
            }

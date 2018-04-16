@@ -13,7 +13,7 @@ namespace pillar_kata
             vendingMachine = new VendingMachine();
         }
         [TestMethod]
-        public void RejectsPennies()
+        public void RejectsPenniesAndSlugs()
         {
             
             vendingMachine.AddCoin("Penny");
@@ -22,13 +22,10 @@ namespace pillar_kata
             ExpectedResult.Add("Penny");
             Assert.AreEqual("INSERT COIN",vendingMachine.CheckDisplay());
             CollectionAssert.AreEqual(ExpectedResult,vendingMachine.EmptyCoinReturn());
-        }
 
-        [TestMethod]
-        public void RejectsSlugs(){
             vendingMachine.AddCoin("Slug");
 
-            List<string> ExpectedResult = new List<string>();
+            ExpectedResult.Clear();
             ExpectedResult.Add("Slug");
             Assert.AreEqual("INSERT COIN",vendingMachine.CheckDisplay());
             CollectionAssert.AreEqual(ExpectedResult,vendingMachine.EmptyCoinReturn());
