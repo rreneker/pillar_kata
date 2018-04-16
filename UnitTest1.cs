@@ -241,6 +241,7 @@ namespace pillar_kata
         [TestMethod]
         public void CheckIfMachineRunsOutOfChangeNickels(){
             VendingMachine vendMachine = new VendingMachine(10,10,10,1,1,1);
+            Assert.AreEqual("INSERT COIN",vendMachine.CheckDisplay());
             vendMachine.AddCoin("Quarter");
             vendMachine.AddCoin("Dime");
             vendMachine.AddCoin("Dime");
@@ -250,5 +251,7 @@ namespace pillar_kata
             
             Assert.AreEqual("EXACT CHANGE ONLY",vendMachine.CheckDisplay());
         }
+
+        
     }
 }
