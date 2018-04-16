@@ -81,6 +81,9 @@ namespace pillar_kata
            else if(coin == "Penny"){
                CoinReturn.Add(coin);
            }
+           else{
+               CoinReturn.Add(coin);
+           }
            
        }
 

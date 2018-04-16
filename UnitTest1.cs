@@ -25,6 +25,16 @@ namespace pillar_kata
         }
 
         [TestMethod]
+        public void RejectsSlugs(){
+            vendingMachine.AddCoin("Slug");
+
+            List<string> ExpectedResult = new List<string>();
+            ExpectedResult.Add("Slug");
+            Assert.AreEqual("INSERT COIN",vendingMachine.CheckDisplay());
+            CollectionAssert.AreEqual(ExpectedResult,vendingMachine.EmptyCoinReturn());
+        }
+
+        [TestMethod]
         public void AcceptsQuartersNickelsAndDimesAndDoesNotReturnThem(){
             
             List<string> ExpectedResult = new List<string>();
