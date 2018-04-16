@@ -252,6 +252,19 @@ namespace pillar_kata
             Assert.AreEqual("EXACT CHANGE ONLY",vendMachine.CheckDisplay());
         }
 
+        [TestMethod]
+        public void CheckIfMachineRunsOutOfChangeDimes(){
+            VendingMachine vendMachine = new VendingMachine(10,10,10,1,1,1);
+            Assert.AreEqual("INSERT COIN",vendMachine.CheckDisplay());
+            vendMachine.AddCoin("Quarter");
+            vendMachine.AddCoin("Quarter");
+            vendMachine.AddCoin("Quarter");
+            vendMachine.Buy("Candy");
+            string dummy = vendMachine.CheckDisplay();
+            
+            Assert.AreEqual("EXACT CHANGE ONLY",vendMachine.CheckDisplay());
+        }
+
         
     }
 }
