@@ -231,5 +231,11 @@ namespace pillar_kata
             Assert.AreEqual("SOLD OUT",vendMachine.CheckDisplay());
             Assert.AreEqual("CREDIT: 50",vendMachine.CheckDisplay());
         }
+
+        [TestMethod]
+        public void CheckIfExactChangeNeeded(){
+            VendingMachine vendMachine = new VendingMachine(10,10,10,0,0,0);
+            Assert.AreEqual("EXACT CHANGE ONLY",vendMachine.CheckDisplay());
+        }
     }
 }

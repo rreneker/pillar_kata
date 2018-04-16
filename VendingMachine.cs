@@ -15,6 +15,9 @@ namespace pillar_kata
        private int colaStock;
        private int candyStock;
        private int chipsStock;
+       private int quarters;
+       private int dimes;
+       private int nickels;
 
        public VendingMachine()
        {
@@ -27,11 +30,26 @@ namespace pillar_kata
            colaStock = 10;
            candyStock = 10;
            chipsStock = 10;
+           nickels = 20;
+           dimes = 20;
+           quarters = 20;
        }
        public VendingMachine(int cola, int chips, int candy): this(){
            colaStock = cola;
            candyStock = candy;
            chipsStock = chips;
+       }
+
+       public VendingMachine(int cola, int chips, int candy, int quarters, int dimes, int nickels): this(){
+           colaStock = cola;
+           candyStock = candy;
+           chipsStock = chips;
+           this.nickels = nickels;
+           this.dimes = dimes;
+           this.quarters = quarters;
+           if(this.nickels == 0 || this.dimes == 0){
+               Display = "EXACT CHANGE ONLY";
+           }
        }
 
        public void AddCoin(string coin){
