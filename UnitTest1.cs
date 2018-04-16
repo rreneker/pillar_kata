@@ -237,5 +237,18 @@ namespace pillar_kata
             VendingMachine vendMachine = new VendingMachine(10,10,10,0,0,0);
             Assert.AreEqual("EXACT CHANGE ONLY",vendMachine.CheckDisplay());
         }
+
+        [TestMethod]
+        public void CheckIfMachineRunsOutOfChangeNickels(){
+            VendingMachine vendMachine = new VendingMachine(10,10,10,1,1,1);
+            vendMachine.AddCoin("Quarter");
+            vendMachine.AddCoin("Dime");
+            vendMachine.AddCoin("Dime");
+            vendMachine.AddCoin("Dime");
+            vendMachine.Buy("Chips");
+            string dummy = vendMachine.CheckDisplay();
+            
+            Assert.AreEqual("EXACT CHANGE ONLY",vendMachine.CheckDisplay());
+        }
     }
 }

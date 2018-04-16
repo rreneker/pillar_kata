@@ -17,7 +17,7 @@ namespace pillar_kata
        private int chipsStock;
        private int quarters;
        private int dimes;
-       private int nickels;
+       public int nickels;
 
        public VendingMachine()
        {
@@ -33,6 +33,7 @@ namespace pillar_kata
            nickels = 20;
            dimes = 20;
            quarters = 20;
+           
        }
        public VendingMachine(int cola, int chips, int candy): this(){
            colaStock = cola;
@@ -50,6 +51,7 @@ namespace pillar_kata
            if(this.nickels == 0 || this.dimes == 0){
                Display = "EXACT CHANGE ONLY";
            }
+           
        }
 
        public void AddCoin(string coin){
@@ -92,7 +94,10 @@ namespace pillar_kata
            string ReturnValue = Display;
            if(tempDisplay == true){
                tempDisplay = false;
-               if(Credit > 0){
+               if(nickels == 0 || dimes == 0){
+                   Display = "EXACT CHANGE ONLY";
+               }
+               else if(Credit > 0){
                    Display = "CREDIT: "+Credit.ToString();
                }
                else{
@@ -110,17 +115,22 @@ namespace pillar_kata
        }
        private void MakeChange(int credit){
            while(credit != 0){
-               if(credit >= 25){
+               if(credit >= 25 && quarters > 0){
                    CoinReturn.Add("Quarter");
                    credit -= 25;
+                   quarters--;
                }
-               else if(credit >= 10){
+               else if(credit >= 10 && dimes > 0){
                    CoinReturn.Add("Dime");
                    credit -= 10;
+                   dimes--;
                }
-               else{
+               else if(nickels > 0){
+                   
                    CoinReturn.Add("Nickel");
                    credit -= 5;
+                   nickels--;
+                   
                }
            }
        }
