@@ -13,18 +13,28 @@ namespace pillar_kata
             this.bank = bank;
         }
     }
+
+    public class VendingMachineItem{
+        public string name;
+        public int cost;
+        public int stock;
+
+        public VendingMachineItem(string name,int cost,int stock){
+            this.name = name;
+            this.cost = cost;
+            this.stock = stock;
+        }
+    }
     public class VendingMachine{
        private string Display;
        private List<string> CoinReturn;
        private List<string> CurrentCoins;
        private List<string> PurchasedProducts;
+       private List<VendingMachineItem> Inventory;
        private int Credit;
 
        private bool tempDisplay;
 
-       private int colaStock;
-       private int candyStock;
-       private int chipsStock;
        private Coin quarters;
        private Coin dimes;
        public Coin nickels;
@@ -40,24 +50,21 @@ namespace pillar_kata
            Credit = 0;
            tempDisplay = false;
            exactChangeNeeded = false;
-           colaStock = 10;
-           candyStock = 10;
-           chipsStock = 10;
+           Inventory = new List<VendingMachineItem>();
+           Inventory.Add(new VendingMachineItem("Chips",50,10));
+           Inventory.Add(new VendingMachineItem("Cola",100,10));
+           Inventory.Add(new VendingMachineItem("Candy",65,10));
            nickels = new Coin("Nickel",5,20);
            dimes = new Coin("Dime",10,20);
            quarters = new Coin("Quarter",25,20);
            
        }
-       public VendingMachine(int cola, int chips, int candy): this(){
-           colaStock = cola;
-           candyStock = candy;
-           chipsStock = chips;
+       public VendingMachine(List<VendingMachineItem> inventory): this(){
+           this.Inventory = inventory;
        }
 
-       public VendingMachine(int cola, int chips, int candy, int quarters, int dimes, int nickels): this(){
-           colaStock = cola;
-           candyStock = candy;
-           chipsStock = chips;
+       public VendingMachine(List<VendingMachineItem> inventory, int quarters, int dimes, int nickels): this(){
+           this.Inventory = inventory;
            this.nickels = new Coin("Nickel",5,nickels);
            this.dimes = new Coin("Dime",10,dimes);
            this.quarters = new Coin("Quarter",25,quarters);
@@ -173,61 +180,27 @@ namespace pillar_kata
            }
        }
        public void Buy(string item){
-           if(item == "Chips"){
-               if(chipsStock == 0){
-                   Display = "SOLD OUT";
-                   tempDisplay = true;
-               }
-               else if(exactChangeNeeded == true){
-                   ReturnCoins();
-               }
-               else if(Credit >= 50){
-                   MakeChange(Credit-50);
-                   PurchaseHelper(item);
-                   chipsStock--;    
-               }
-               else{
-                    Display = "PRICE: 50";
-                    tempDisplay = true;
-               }
-              
-           }
-           else if(item == "Cola"){
-               if(colaStock == 0){
-                   Display = "SOLD OUT";
-                   tempDisplay = true;
-               }
-               else if(exactChangeNeeded == true){
-                   ReturnCoins();
-               }
-               else if(Credit >= 100){
-                   MakeChange(Credit-100);
-                   PurchaseHelper(item);
-                   colaStock--;
-               }
-               else{
-                   Display = "PRICE: 100";
-                   tempDisplay = true;
-               }
-           }
-           else if(item == "Candy"){
-               if(candyStock == 0){
-                   Display = "SOLD OUT";
-                   tempDisplay = true;
-               }
-               else if(exactChangeNeeded == true){
-                   ReturnCoins();
-               }
-               else if(Credit >= 65){
-                   MakeChange(Credit-65);
-                   PurchaseHelper(item);
-                   candyStock--;
-               }
-               else{
-                   Display = "PRICE: 65";
-                   tempDisplay = true;
-               }
-           }
+           for(int i=0; i<Inventory.Count;i++){
+                if(item == Inventory[i].name){
+                    if(Inventory[i].stock == 0){
+                        Display = "SOLD OUT";
+                        tempDisplay = true;
+                    }
+                    else if(exactChangeNeeded == true){
+                        ReturnCoins();
+                    }
+                    else if(Credit >= Inventory[i].cost){
+                        MakeChange(Credit-Inventory[i].cost);
+                        PurchaseHelper(item);
+                        Inventory[i].stock--;    
+                    }
+                    else{
+                        Display = "PRICE: "+Inventory[i].cost.ToString();
+                        tempDisplay = true;
+                    }
+                    break;
+                }
+            }
        }
 
        public List<string> RemoveProducts(){
