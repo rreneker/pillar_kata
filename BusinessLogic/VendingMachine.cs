@@ -41,9 +41,16 @@ namespace pillar_kata
 
        private bool exactChangeNeeded;
 
+       private string InsertCoin = "INSERT COIN";
+       private string ThankYou = "THANK YOU";
+       private string ExactChange = "EXACT CHANGE ONLY";
+       private string Credit_str = "CREDIT: ";
+       private string SoldOut = "SOLD OUT";
+       private string Price = "PRICE: ";
+
        public VendingMachine()
        {
-           Display = "INSERT COIN";
+           Display = InsertCoin;
            CoinReturn = new List<string>();
            CurrentCoins = new List<string>();
            PurchasedProducts = new List<string>();
@@ -69,7 +76,7 @@ namespace pillar_kata
            this.dimes = new Coin("Dime",10,dimes);
            this.quarters = new Coin("Quarter",25,quarters);
            if(this.nickels.bank == 0 || this.dimes.bank == 0){
-               Display = "EXACT CHANGE ONLY";
+               Display = ExactChange;
                exactChangeNeeded = true;
            }
            
@@ -83,17 +90,17 @@ namespace pillar_kata
            if(coin == quarters.name){
                Credit += quarters.value;
                CurrentCoins.Add(coin);
-               Display = "CREDIT: "+Credit.ToString();
+               Display = Credit_str+Credit.ToString();
            }
            else if(coin == dimes.name){
                Credit += dimes.value;
                CurrentCoins.Add(coin);
-               Display = "CREDIT: "+Credit.ToString();
+               Display = Credit_str+Credit.ToString();
            }
            else if(coin == nickels.name){
                Credit += nickels.value;
                CurrentCoins.Add(coin);
-               Display = "CREDIT: "+Credit.ToString();
+               Display = Credit_str+Credit.ToString();
            }
            else{
                CoinReturn.Add(coin);
@@ -104,7 +111,7 @@ namespace pillar_kata
        public void ReturnCoins(){
            CoinReturn.AddRange(CurrentCoins);
            CurrentCoins.Clear();
-           Display="INSERT COIN";
+           Display=InsertCoin;
            Credit=0;
        }
 
@@ -120,21 +127,21 @@ namespace pillar_kata
            if(tempDisplay == true){
                tempDisplay = false;
                if(nickels.bank == 0 || dimes.bank == 0){
-                   Display = "EXACT CHANGE ONLY";
+                   Display = ExactChange;
                    exactChangeNeeded = true;
                }
                else if(Credit > 0){
-                   Display = "CREDIT: "+Credit.ToString();
+                   Display = Credit_str+Credit.ToString();
                }
                else{
-                   Display = "INSERT COIN";
+                   Display = InsertCoin;
                }
                
            }
            return ReturnValue;
        }
        private void PurchaseHelper(string product){
-            Display = "THANK YOU";
+            Display = ThankYou;
             tempDisplay = true;
             Credit = 0;
             PurchasedProducts.Add(product);
@@ -183,7 +190,7 @@ namespace pillar_kata
            for(int i=0; i<Inventory.Count;i++){
                 if(item == Inventory[i].name){
                     if(Inventory[i].stock == 0){
-                        Display = "SOLD OUT";
+                        Display = SoldOut;
                         tempDisplay = true;
                     }
                     else if(exactChangeNeeded == true){
@@ -195,7 +202,7 @@ namespace pillar_kata
                         Inventory[i].stock--;    
                     }
                     else{
-                        Display = "PRICE: "+Inventory[i].cost.ToString();
+                        Display = Price+Inventory[i].cost.ToString();
                         tempDisplay = true;
                     }
                     break;
