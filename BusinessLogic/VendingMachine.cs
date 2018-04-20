@@ -73,17 +73,17 @@ namespace pillar_kata
        }
 
        public void AddCoin(string coin){
-           if(coin == "Quarter"){
+           if(coin == quarters.name){
                Credit += quarters.value;
                CurrentCoins.Add(coin);
                Display = "CREDIT: "+Credit.ToString();
            }
-           else if(coin == "Dime"){
+           else if(coin == dimes.name){
                Credit += dimes.value;
                CurrentCoins.Add(coin);
                Display = "CREDIT: "+Credit.ToString();
            }
-           else if(coin == "Nickel"){
+           else if(coin == nickels.name){
                Credit += nickels.value;
                CurrentCoins.Add(coin);
                Display = "CREDIT: "+Credit.ToString();
@@ -135,31 +135,31 @@ namespace pillar_kata
        private void MakeChange(int credit){
            
            for(int i = 0; i < CurrentCoins.Count;i++){
-               if(CurrentCoins[i] == "Quarter"){
+               if(CurrentCoins[i] == quarters.name){
                    quarters.bank++;
                }
-               else if(CurrentCoins[i] == "Dime"){
+               else if(CurrentCoins[i] == dimes.name){
                    dimes.bank++;
                }
-               else if(CurrentCoins[i] == "Nickel"){
+               else if(CurrentCoins[i] == nickels.name){
                    nickels.bank++;
                }
            }
            CurrentCoins.Clear();
            while(credit != 0){
                if(credit >= 25 && quarters.bank > 0){
-                   CoinReturn.Add("Quarter");
+                   CoinReturn.Add(quarters.name);
                    credit -= quarters.value;
                    quarters.bank--;
                }
                else if(credit >= 10 && dimes.bank > 0){
-                   CoinReturn.Add("Dime");
+                   CoinReturn.Add(dimes.name);
                    credit -= dimes.value;
                    dimes.bank--;
                }
                else if(nickels.bank > 0){
                    
-                   CoinReturn.Add("Nickel");
+                   CoinReturn.Add(nickels.name);
                    credit -= nickels.value;
                    nickels.bank--;
                    
