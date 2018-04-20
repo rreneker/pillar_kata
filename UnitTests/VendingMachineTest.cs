@@ -12,7 +12,7 @@ namespace pillar_kata
         [TestInitialize]
         public void TestSetup(){
             vendingMachine = new VendingMachine();
-            List<VendingMachineItem> Inventory = new List<VendingMachineItem>();
+            Inventory = new List<VendingMachineItem>();
             Inventory.Add(new VendingMachineItem("Chips",50,10));
             Inventory.Add(new VendingMachineItem("Cola",100,10));
             Inventory.Add(new VendingMachineItem("Candy",65,10));
@@ -262,10 +262,6 @@ namespace pillar_kata
         public void CheckIfMachineRunsOutOfChangeNickels(){
             
             //Console.WriteLine(Inventory.Count);
-            List<VendingMachineItem> Inventory = new List<VendingMachineItem>();
-            Inventory.Add(new VendingMachineItem("Chips",50,10));
-            Inventory.Add(new VendingMachineItem("Cola",100,10));
-            Inventory.Add(new VendingMachineItem("Candy",65,10));
             VendingMachine vendMachine = new VendingMachine(Inventory,1,1,1);
             Assert.AreEqual("INSERT COIN",vendMachine.CheckDisplay());
             vendMachine.AddCoin("Quarter");
@@ -282,10 +278,6 @@ namespace pillar_kata
 
         [TestMethod]
         public void CheckIfMachineRunsOutOfChangeDimes(){
-            List<VendingMachineItem> Inventory = new List<VendingMachineItem>();
-            Inventory.Add(new VendingMachineItem("Chips",50,10));
-            Inventory.Add(new VendingMachineItem("Cola",100,10));
-            Inventory.Add(new VendingMachineItem("Candy",65,10));
             VendingMachine vendMachine = new VendingMachine(Inventory,1,1,1);
             Assert.AreEqual("INSERT COIN",vendMachine.CheckDisplay());
             vendMachine.AddCoin("Quarter");
@@ -299,10 +291,6 @@ namespace pillar_kata
 
         [TestMethod]
         public void CheckIfMachineGetsOutOfExactChangeMode(){
-            List<VendingMachineItem> Inventory = new List<VendingMachineItem>();
-            Inventory.Add(new VendingMachineItem("Chips",50,10));
-            Inventory.Add(new VendingMachineItem("Cola",100,10));
-            Inventory.Add(new VendingMachineItem("Candy",65,10));
             VendingMachine vendMachine = new VendingMachine(Inventory,1,0,0);
             vendMachine.AddCoin("Quarter");
             vendMachine.AddCoin("Quarter");
@@ -316,10 +304,6 @@ namespace pillar_kata
 
         [TestMethod]
         public void EnforceExactChangeState(){
-            List<VendingMachineItem> Inventory = new List<VendingMachineItem>();
-            Inventory.Add(new VendingMachineItem("Chips",50,10));
-            Inventory.Add(new VendingMachineItem("Cola",100,10));
-            Inventory.Add(new VendingMachineItem("Candy",65,10));
             VendingMachine machine = new VendingMachine(Inventory,0,0,0);
             machine.AddCoin("Quarter");
             machine.AddCoin("Quarter");
