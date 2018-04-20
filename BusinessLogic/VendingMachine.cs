@@ -3,6 +3,16 @@ using System.Collections.Generic;
 
 namespace pillar_kata
 {
+    public class Coin{
+        public string name;
+        public int value;
+        public int bank;//number of coins currently in machine
+        public Coin(string name,int value,int bank){
+            this.name = name;
+            this.value = value;
+            this.bank = bank;
+        }
+    }
     public class VendingMachine{
        private string Display;
        private List<string> CoinReturn;
@@ -15,9 +25,9 @@ namespace pillar_kata
        private int colaStock;
        private int candyStock;
        private int chipsStock;
-       private int quarters;
-       private int dimes;
-       public int nickels;
+       private Coin quarters;
+       private Coin dimes;
+       public Coin nickels;
 
        private bool exactChangeNeeded;
 
@@ -33,9 +43,9 @@ namespace pillar_kata
            colaStock = 10;
            candyStock = 10;
            chipsStock = 10;
-           nickels = 20;
-           dimes = 20;
-           quarters = 20;
+           nickels = new Coin("Nickel",5,20);
+           dimes = new Coin("Dime",10,20);
+           quarters = new Coin("Quarter",25,20);
            
        }
        public VendingMachine(int cola, int chips, int candy): this(){
@@ -48,10 +58,10 @@ namespace pillar_kata
            colaStock = cola;
            candyStock = candy;
            chipsStock = chips;
-           this.nickels = nickels;
-           this.dimes = dimes;
-           this.quarters = quarters;
-           if(this.nickels == 0 || this.dimes == 0){
+           this.nickels = new Coin("Nickel",5,nickels);
+           this.dimes = new Coin("Dime",10,dimes);
+           this.quarters = new Coin("Quarter",25,quarters);
+           if(this.nickels.bank == 0 || this.dimes.bank == 0){
                Display = "EXACT CHANGE ONLY";
                exactChangeNeeded = true;
            }
@@ -64,17 +74,17 @@ namespace pillar_kata
 
        public void AddCoin(string coin){
            if(coin == "Quarter"){
-               Credit += 25;
+               Credit += quarters.value;
                CurrentCoins.Add(coin);
                Display = "CREDIT: "+Credit.ToString();
            }
            else if(coin == "Dime"){
-               Credit += 10;
+               Credit += dimes.value;
                CurrentCoins.Add(coin);
                Display = "CREDIT: "+Credit.ToString();
            }
            else if(coin == "Nickel"){
-               Credit += 5;
+               Credit += nickels.value;
                CurrentCoins.Add(coin);
                Display = "CREDIT: "+Credit.ToString();
            }
@@ -102,7 +112,7 @@ namespace pillar_kata
            string ReturnValue = Display;
            if(tempDisplay == true){
                tempDisplay = false;
-               if(nickels == 0 || dimes == 0){
+               if(nickels.bank == 0 || dimes.bank == 0){
                    Display = "EXACT CHANGE ONLY";
                    exactChangeNeeded = true;
                }
@@ -126,39 +136,39 @@ namespace pillar_kata
            
            for(int i = 0; i < CurrentCoins.Count;i++){
                if(CurrentCoins[i] == "Quarter"){
-                   quarters++;
+                   quarters.bank++;
                }
                else if(CurrentCoins[i] == "Dime"){
-                   dimes++;
+                   dimes.bank++;
                }
                else if(CurrentCoins[i] == "Nickel"){
-                   nickels++;
+                   nickels.bank++;
                }
            }
            CurrentCoins.Clear();
            while(credit != 0){
-               if(credit >= 25 && quarters > 0){
+               if(credit >= 25 && quarters.bank > 0){
                    CoinReturn.Add("Quarter");
-                   credit -= 25;
-                   quarters--;
+                   credit -= quarters.value;
+                   quarters.bank--;
                }
-               else if(credit >= 10 && dimes > 0){
+               else if(credit >= 10 && dimes.bank > 0){
                    CoinReturn.Add("Dime");
-                   credit -= 10;
-                   dimes--;
+                   credit -= dimes.value;
+                   dimes.bank--;
                }
-               else if(nickels > 0){
+               else if(nickels.bank > 0){
                    
                    CoinReturn.Add("Nickel");
-                   credit -= 5;
-                   nickels--;
+                   credit -= nickels.value;
+                   nickels.bank--;
                    
                }
                else{
                    break;
                }
            }
-           if(nickels > 0 && dimes > 0){
+           if(nickels.bank > 0 && dimes.bank > 0){
                exactChangeNeeded = false;
            }
        }
